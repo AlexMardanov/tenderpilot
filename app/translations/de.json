@@ -1,0 +1,7 @@
+{
+  "app.components.Footer.header": "Dies ist die Footer-Komponente!",
+  "app.components.Header.header": "",
+  "app.containers.LoginPage.header": "Guten Tag",
+  "app.containers.NotFoundPage.back": "Zurück",
+  "app.containers.NotFoundPage.title": "Nicht gefunden"
+}

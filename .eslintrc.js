@@ -71,6 +71,8 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'react/jsx-no-target-blank': 0,
     'react/jsx-uses-vars': 2,
+    'react/jsx-props-no-spreading': 0,
+    'react/static-property-placement': 0,
     'react/require-default-props': 0,
     'react/require-extension': 0,
     'react/self-closing-comp': 0,
@@ -78,6 +80,7 @@ module.exports = {
     'redux-saga/no-yield-in-race': 2,
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
+    "jsx-quotes": ["error", "prefer-double"],
   },
   settings: {
     'import/resolver': {

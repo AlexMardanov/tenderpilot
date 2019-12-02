@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #636b6f;
   }
 
   body.fontLoaded {
@@ -16,16 +17,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: #fafafa;
+    background-color: #ffffff;
     min-height: 100%;
     min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
   }
+`
 
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
-  }
-`;
-
-export default GlobalStyle;
+export default GlobalStyle
