@@ -5,15 +5,15 @@
  */
 
 import React from 'react'
-// import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 
 import LocaleToggle from 'containers/LocaleToggle'
 import messages from './messages'
+import { colors } from '../../theme/theme'
 
 const Wrapper = styled.footer`
-  background: #008eb3;
+  background: ${colors.baseColor};
   color: #eee;
   padding: 1rem 0;
 `
@@ -37,7 +37,5 @@ export function Footer() {
     </Wrapper>
   )
 }
-
-Footer.propTypes = {}
 
 export default Footer

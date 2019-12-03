@@ -1,7 +1,7 @@
 {
   "app.components.Footer.header": "This is the Footer component!",
   "app.components.Header.header": "This is the Header component!",
-  "app.containers.LoginPage.header": "This is the HomePage 2 container!",
+  "app.containers.LoginPage.header": "This is the LoginPage container!",
   "app.containers.NotFoundPage.back": "Back",
   "app.containers.NotFoundPage.title": "Not Found"
 }
