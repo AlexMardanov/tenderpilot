@@ -10,10 +10,10 @@ import { FormattedMessage } from 'react-intl'
 
 import LocaleToggle from 'containers/LocaleToggle'
 import messages from './messages'
-import { colors } from '../../theme/theme'
+import { theme } from '../../theme/theme'
 
 const Wrapper = styled.footer`
-  background: ${colors.baseColor};
+  background: ${theme.colors.baseColor};
   color: #eee;
   padding: 1rem 0;
 `

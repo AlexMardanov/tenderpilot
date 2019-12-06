@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import logo from '../images/logo.png'
 
 export const Image = styled.img`
-  max-width: 150px;
+  max-width: 170px;
 `
 
 export function Logo() {

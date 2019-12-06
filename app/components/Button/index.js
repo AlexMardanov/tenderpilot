@@ -4,46 +4,26 @@
  *
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-import { colors } from '../../theme/theme'
+import { theme } from '../../theme/theme'
 
-const StyledButton = styled.button`
-  background: ${props => props.bgColor};
-  color: #fafafa;
-  min-width: 120px;
-  padding: 2px 15px;
+export const Button = styled(Link)`
+  background: ${props => (props.color === 'primary' ? theme.colors.baseColor : 'none')};
+  color: ${props => (props.color === 'outline' ? theme.colors.baseColor : theme.colors.white)};
+  padding: 4px 15px;
   border-radius: 45px;
-  border: solid 2px #008eb3;
+  border: 1px solid ${theme.colors.baseColor};
   box-shadow: none;
-  margin-top: 3px;
   transition: all 0.3s ease 0s;
-  margin-top: 5px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background: ${props => (props.color === 'primary' ? 'none' : theme.colors.baseColor)};
+    color: ${props => (props.color === 'outline' ? theme.colors.white : theme.colors.baseColor)};
+  }
 `
-
-export function Button({ onClick, type, children, bgColor }) {
-  return (
-    // eslint-disable-next-line react/button-has-type
-    <StyledButton type={type} onClick={onClick} bgColor={bgColor}>
-      {children}
-    </StyledButton>
-  )
-}
-
-Button.propTypes = {
-  children: PropTypes.string,
-  type: PropTypes.string,
-  bgColor: PropTypes.string,
-  onClick: PropTypes.func,
-}
-
-Button.defaultProps = {
-  children: null,
-  type: 'button',
-  bgColor: colors.baseColor,
-  onClick: () => {},
-}
 
 export default Button

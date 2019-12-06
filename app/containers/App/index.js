@@ -11,6 +11,7 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import LoginPage from 'containers/LoginPage/Loadable'
+import BooksPageList from 'containers/BooksPage/List/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 
 import GlobalStyle from '../../global-styles'
@@ -21,6 +22,7 @@ export default function App() {
       <Switch>
         <Redirect exact from="/" to="/login" />
         <Route path="/login" component={LoginPage} />
+        <Route path="/books" component={BooksPageList} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
