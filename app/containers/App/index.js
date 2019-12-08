@@ -10,9 +10,12 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import LoginPage from 'containers/LoginPage/Loadable'
-import BooksPageList from 'containers/BooksPage/List/Loadable'
-import NotFoundPage from 'containers/NotFoundPage/Loadable'
+import Login from 'pages/Login/Loadable'
+import About from 'pages/About/Loadable'
+import ProductsList from 'pages/ProductsList/Loadable'
+import ProductEdit from 'pages/ProductEdit/Loadable'
+import ProductShow from 'pages/ProductShow/Loadable'
+import NotFound from 'pages/NotFound/Loadable'
 
 import GlobalStyle from '../../global-styles'
 
@@ -21,9 +24,12 @@ export default function App() {
     <>
       <Switch>
         <Redirect exact from="/" to="/login" />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/books" component={BooksPageList} />
-        <Route component={NotFoundPage} />
+        <Route path="/login" component={Login} />
+        <Route path="/about" component={About} />
+        <Route path="/products/:productId/edit" component={ProductEdit} />
+        <Route path="/products/:productId" component={ProductShow} />
+        <Route path="/products" component={ProductsList} />
+        <Route component={NotFound} />
       </Switch>
       <GlobalStyle />
     </>

@@ -6,17 +6,11 @@
 
 import React from 'react'
 // import { FormattedMessage } from 'react-intl'
-import styled from 'styled-components'
 
 import { Button } from 'components/Button'
-import { Container } from './components/Container'
-import { Wrapper } from './components/Wrapper'
-import { Logo } from './components/Logo'
-import { MenuLink } from './components/MenuLink'
 
-const MtStyledButton = styled(Button)`
-  margin-right: 20px;
-`
+import { Container, Wrapper, Logo, MenuLink, StyledButton } from './styled'
+import logo from './images/logo.png'
 
 // import messages from './messages'
 
@@ -24,13 +18,14 @@ export function Header() {
   return (
     <Wrapper>
       <Container maxWidth="md">
-        <Logo />
+        <Logo src={logo} />
         <div>
           <MenuLink to="/">HOME</MenuLink>
           <MenuLink to="/about">ABOUT US</MenuLink>
-          <MtStyledButton color="outline" to="/">
+          <MenuLink to="/products">PRODUCTS</MenuLink>
+          <StyledButton color="outline" to="/">
             REQUEST FOR REGISTRATION
-          </MtStyledButton>
+          </StyledButton>
           <Button color="primary" to="/login">
             LOGIN
           </Button>

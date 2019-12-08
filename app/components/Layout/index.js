@@ -6,14 +6,10 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
 import { Header } from 'components/Header'
 import { Footer } from 'components/Footer'
-
-const Wrapper = styled.main`
-  flex-grow: 1;
-`
+import { Wrapper } from './styled'
 
 export function Layout({ children }) {
   return (
