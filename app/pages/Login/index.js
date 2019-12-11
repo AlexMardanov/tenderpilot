@@ -8,13 +8,12 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Layout } from 'components/Layout'
 import messages from './messages'
 
 export default function Login() {
   return (
-    <Layout>
+    <>
       <FormattedMessage {...messages.header} />
-    </Layout>
+    </>
   )
 }

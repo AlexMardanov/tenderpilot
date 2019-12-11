@@ -23,3 +23,14 @@ export function editProduct(id, data) {
     body: JSON.stringify(data),
   })
 }
+
+export function createProduct(data) {
+  return request(`${PRODUCTS_URL}`, {
+    method: 'POST',
+    headers: {
+      accept: 'application/ld+json',
+      'Content-Type': 'application/ld+json',
+    },
+    body: JSON.stringify(data),
+  })
+}

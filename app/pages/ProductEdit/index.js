@@ -11,7 +11,6 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { Formik, Field, Form } from 'formik'
 
-import { Layout } from 'components/Layout'
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 import { getProduct, getProductLoading, getProductError, getProductEdited } from './selectors'
@@ -90,12 +89,12 @@ export function ProductEdit(props) {
   }
 
   return (
-    <Layout>
+    <>
       <h1>Product Edit</h1>
       {!!isEdited && <div>PRODUCT HAS BEEN EDITED</div>}
       {!!loading && <div>Loading...</div>}
       {renderForm()}
-    </Layout>
+    </>
   )
 }
 

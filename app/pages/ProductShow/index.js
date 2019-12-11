@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { Layout } from 'components/Layout'
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 import { getProduct, getProductLoading, getProductError, getProductDeleted } from './selectors'
@@ -88,12 +87,12 @@ export function ProductShow(props) {
   const productExists = !deleted && Object.entries(product).length !== 0
 
   return (
-    <Layout>
+    <>
       <h1>Product</h1>
       {(!!deleted || !!error) && <div>PRODUCT DELETED OR NOT EXISTS</div>}
       {!!loading && <div>Loading...</div>}
       {productExists && renderProduct(product)}
-    </Layout>
+    </>
   )
 }
 

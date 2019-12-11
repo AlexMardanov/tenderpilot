@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { Layout } from 'components/Layout'
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 import { getProducts, getProductsLoading, getProductsError } from './selectors'
@@ -76,13 +75,13 @@ export function ProductsList(props) {
   }
 
   return (
-    <Layout>
+    <>
       <h1>Products</h1>
       {!hasProducts && <div>NO PRODUCTS</div>}
       {!!error && <div>{error}</div>}
       {!!loading && <div>Loading...</div>}
       {hasProducts && renderProducts(products)}
-    </Layout>
+    </>
   )
 }
 
