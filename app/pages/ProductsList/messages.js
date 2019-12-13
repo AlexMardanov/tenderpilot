@@ -10,7 +10,7 @@ export const scope = 'app.pages.ProductsList'
 
 export default defineMessages({
   header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the ProductsList container!',
+    id: `${scope}.search`,
+    defaultMessage: 'Search',
   },
 })

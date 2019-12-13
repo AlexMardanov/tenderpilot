@@ -1,7 +1,12 @@
 {
   "app.components.Footer.header": "This is the Footer component!",
   "app.components.Header.header": "This is the Header component!",
-  "app.containers.LoginPage.header": "This is the LoginPage container!",
   "app.containers.NotFoundPage.back": "Back",
-  "app.containers.NotFoundPage.title": "Not Found"
+  "app.containers.NotFoundPage.title": "Not Found",
+  "app.pages.About.header": "This is the AboutPage container!",
+  "app.pages.Login.header": "This is the HomePage container!",
+  "app.pages.ProductCreate.header": "This is the ProductCreate container!",
+  "app.pages.ProductEdit.header": "This is the ProductEdit container!",
+  "app.pages.ProductShow.header": "This is the ProductShow container!",
+  "app.pages.ProductsList.search": "Search"
 }

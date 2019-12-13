@@ -1,4 +1,4 @@
-import { put, call, all, takeLatest } from 'redux-saga/effects'
+import { put, call, all, takeLatest, select, takeLeading, debounce } from 'redux-saga/effects'
 import { fetchProducts, deleteProduct } from 'services/API'
 import {
   fetchProductsSuccess,
@@ -6,19 +6,27 @@ import {
   deleteProductSuccess,
   deleteProductError,
 } from './actions'
-import { PRODUCT_DELETE_REQUEST, PRODUCTS_REQUEST } from './constants'
+import {
+  PRODUCT_DELETE_REQUEST,
+  PRODUCTS_REQUEST,
+  ROWS_PER_PAGE_CHANGE,
+  SEARCH,
+  SORT,
+} from './constants'
+import { getSearchQuery, getSortQuery } from './selectors'
 
 function* getProducts() {
   try {
-    const products = yield call(fetchProducts)
-    // eslint-disable-next-line no-console
-    console.info('products', products)
-    const payload = products['hydra:member']
+    const query = yield select(getSearchQuery())
+    const sort = yield select(getSortQuery())
+    const request = yield call(fetchProducts, query, sort)
+    const payload = {
+      products: request['hydra:member'],
+      totalItems: request['hydra:totalItems'],
+    }
 
     yield put(fetchProductsSuccess(payload))
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('err', err)
     yield put(fetchProductsError(err))
   }
 }
@@ -37,7 +45,10 @@ function* removeProduct(action) {
 
 function* actionWatcher() {
   yield takeLatest(PRODUCT_DELETE_REQUEST, removeProduct)
-  yield takeLatest(PRODUCTS_REQUEST, getProducts)
+  yield takeLeading(PRODUCTS_REQUEST, getProducts)
+  yield takeLatest(ROWS_PER_PAGE_CHANGE, getProducts)
+  yield debounce(2000, SEARCH, getProducts)
+  yield takeLatest(SORT, getProducts)
 }
 
 export default function* rootSaga() {

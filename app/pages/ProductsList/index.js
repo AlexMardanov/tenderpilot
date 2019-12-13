@@ -9,17 +9,49 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
+import { FormattedMessage } from 'react-intl'
 
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
-import { getProducts, getProductsLoading, getProductsError } from './selectors'
+import Loader from 'components/Loader'
+import {
+  getProducts,
+  getProductsLoading,
+  getProductsError,
+  getSearchQuery,
+  getTotalItems,
+  getSortQuery,
+} from './selectors'
 import reducer from './reducer'
 import saga from './saga'
-import { Table, RemoveButton, ShowButton } from './styled'
-import { deleteProductRequest, fetchProductsRequest } from './actions'
+import {
+  deleteProductRequest,
+  fetchProductsRequest,
+  changeRowsPerPage,
+  changePage,
+  search,
+  sort,
+} from './actions'
+import Table from './components/Table'
+import Title from './components/Title'
+import messages from './messages'
 
 export function ProductsList(props) {
-  const { products, loading, error, handleRemoveClick, history, handleGetProducts } = props
+  const {
+    products,
+    loading,
+    error,
+    searchQuery,
+    sortQuery,
+    history,
+    totalItems,
+    handleRemoveClick,
+    handleGetProducts,
+    handleRowsPerPageChange,
+    handlePageChange,
+    handleSearch,
+    handleSortDispatch,
+  } = props
 
   useInjectReducer({ key: 'productsList', reducer })
   useInjectSaga({ key: 'ProductsListPage', saga })
@@ -28,59 +60,46 @@ export function ProductsList(props) {
     handleGetProducts()
   }, [])
 
+  React.useEffect(() => {
+    handleGetProducts(searchQuery)
+  }, [searchQuery.rowPerpage, searchQuery.page])
+
   const hasProducts = !!products && !!products.length
 
-  function renderProducts() {
-    return (
-      <Table>
-        <thead>
-          <tr>
-            <td>id</td>
-            <td>created</td>
-            <td>deleted</td>
-            <td>name</td>
-            <td>number</td>
-            <td>unit</td>
-            <td>actions</td>
-          </tr>
-          <tr></tr>
-        </thead>
-        <tbody>
-          {products.map(product => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.created}</td>
-              <td>{`${product.deleted}`}</td>
-              <td>{product.name}</td>
-              <td>{product.number}</td>
-              <td>{product.unit}</td>
-              <td>
-                <ShowButton
-                  type="button"
-                  onClick={() => {
-                    history.push(`/products/${product.id}`)
-                  }}
-                >
-                  show
-                </ShowButton>
-                <RemoveButton type="button" onClick={handleRemoveClick(product.id)}>
-                  remove
-                </RemoveButton>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    )
+  function handleEditClick(id) {
+    return () => history.push(`/products/${id}/edit`)
+  }
+
+  function handleSort(sortBy) {
+    // const direction = sortQuery.sortBy === sortBy ? 'asc' : 'desc'
+
+    return handleSortDispatch(sortBy, sortQuery)
+  }
+
+  const tableProps = {
+    data: products,
+    searchQuery,
+    sortQuery,
+    totalItems,
+    handleRemoveClick,
+    handleEditClick,
+    handleRowsPerPageChange,
+    handlePageChange,
+    handleSort,
+  }
+
+  const titleProps = {
+    handleSearch,
+    searchLabel: <FormattedMessage {...messages.header} />,
   }
 
   return (
     <>
-      <h1>Products</h1>
+      <Title {...titleProps} />
       {!hasProducts && <div>NO PRODUCTS</div>}
       {!!error && <div>{error}</div>}
-      {!!loading && <div>Loading...</div>}
-      {hasProducts && renderProducts(products)}
+      {!!loading && <Loader />}
+      {hasProducts && <Table {...tableProps} />}
     </>
   )
 }
@@ -90,14 +109,24 @@ ProductsList.propTypes = {
   products: PropTypes.array,
   loading: PropTypes.bool,
   error: PropTypes.string,
+  totalItems: PropTypes.number,
+  searchQuery: PropTypes.object,
+  sortQuery: PropTypes.object,
   handleRemoveClick: PropTypes.func,
   handleGetProducts: PropTypes.func,
+  handleRowsPerPageChange: PropTypes.func,
+  handlePageChange: PropTypes.func,
+  handleSearch: PropTypes.func,
+  handleSortDispatch: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
   products: getProducts(),
   loading: getProductsLoading(),
   error: getProductsError(),
+  searchQuery: getSearchQuery(),
+  sortQuery: getSortQuery(),
+  totalItems: getTotalItems(),
 })
 
 function mapDispatchToProps(dispatch) {
@@ -105,14 +134,38 @@ function mapDispatchToProps(dispatch) {
     return () => dispatch(deleteProductRequest(id))
   }
 
-  function handleGetProducts() {
-    return dispatch(fetchProductsRequest())
+  function handleGetProducts(data) {
+    return dispatch(fetchProductsRequest(data))
+  }
+
+  function handleRowsPerPageChange(e) {
+    return dispatch(changeRowsPerPage(e.target.value))
+  }
+
+  function handlePageChange(_event, page) {
+    return dispatch(changePage(page))
+  }
+
+  function handleSearch(e) {
+    return dispatch(search(e.target.value))
+  }
+
+  function handleSortDispatch(property, sortQuery) {
+    let direction = 'asc'
+    if (sortQuery.sortBy === property) {
+      direction = sortQuery.direction === 'asc' ? 'desc' : 'asc'
+    }
+    return () => dispatch(sort(property, direction))
   }
 
   return {
     dispatch,
     handleRemoveClick,
     handleGetProducts,
+    handleRowsPerPageChange,
+    handlePageChange,
+    handleSearch,
+    handleSortDispatch,
   }
 }
 

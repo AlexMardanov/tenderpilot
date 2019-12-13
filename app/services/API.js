@@ -1,8 +1,15 @@
 import request from 'utils/request'
 import { PRODUCTS_URL } from './config'
 
-export function fetchProducts() {
-  return request(PRODUCTS_URL)
+export function fetchProducts(query, sort) {
+  const { rowsPerPage, page, name } = query
+  const { sortBy, direction } = sort
+
+  const search = name ? `&name=${name}` : ''
+  const order = sort.sortBy ? `&order[${sortBy}]=${direction}` : ''
+  const url = `${PRODUCTS_URL}?perPage=${rowsPerPage}&page=${page + 1}${search}${order}`
+
+  return request(url)
 }
 
 export function fetchProduct(id) {

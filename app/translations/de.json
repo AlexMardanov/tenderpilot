@@ -1,7 +1,12 @@
 {
   "app.components.Footer.header": "Dies ist die Footer-Komponente!",
   "app.components.Header.header": "",
-  "app.containers.LoginPage.header": "Guten Tag",
   "app.containers.NotFoundPage.back": "Zurück",
-  "app.containers.NotFoundPage.title": "Nicht gefunden"
+  "app.containers.NotFoundPage.title": "Nicht gefunden",
+  "app.pages.About.header": "",
+  "app.pages.Login.header": "",
+  "app.pages.ProductCreate.header": "",
+  "app.pages.ProductEdit.header": "",
+  "app.pages.ProductShow.header": "",
+  "app.pages.ProductsList.search": "Suchen"
 }

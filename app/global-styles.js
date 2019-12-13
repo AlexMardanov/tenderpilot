@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: ${theme.colors.white};
+    background-color: ${theme.colors.bg};
     min-height: 100%;
     min-width: 100%;
     display: flex;
