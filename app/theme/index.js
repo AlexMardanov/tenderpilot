@@ -1,3 +1,5 @@
+import { createMuiTheme } from '@material-ui/core/styles'
+
 export const theme = {
   colors: {
     baseColor: '#008eb3',
@@ -10,3 +12,11 @@ export const theme = {
     titleSize: '20px',
   },
 }
+
+export const materialTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: theme.colors.baseColor,
+    },
+  },
+})

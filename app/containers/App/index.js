@@ -9,6 +9,7 @@
 
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { ThemeProvider } from '@material-ui/core/styles'
 
 import Login from 'pages/Login/Loadable'
 import About from 'pages/About/Loadable'
@@ -21,21 +22,24 @@ import NotFound from 'pages/NotFound/Loadable'
 import { Layout } from 'components/Layout'
 
 import GlobalStyle from 'global-styles'
+import { materialTheme } from 'theme'
 
 export default function App() {
   return (
-    <Layout>
-      <Switch>
-        <Redirect exact from="/" to="/login" />
-        <Route path="/login" component={Login} exact />
-        <Route path="/about" component={About} exact />
-        <Route path="/products/create" component={ProductCreate} exact />
-        <Route path="/products/:productId/edit" component={ProductEdit} exact />
-        <Route path="/products/:productId" component={ProductShow} exact />
-        <Route path="/products" component={ProductsList} exact />
-        <Route component={NotFound} exact />
-      </Switch>
-      <GlobalStyle />
-    </Layout>
+    <ThemeProvider theme={materialTheme}>
+      <Layout>
+        <Switch>
+          <Redirect exact from="/" to="/login" />
+          <Route path="/login" component={Login} exact />
+          <Route path="/about" component={About} exact />
+          <Route path="/products/create" component={ProductCreate} exact />
+          <Route path="/products/:productId/edit" component={ProductEdit} exact />
+          <Route path="/products/:productId" component={ProductShow} exact />
+          <Route path="/products" component={ProductsList} exact />
+          <Route component={NotFound} exact />
+        </Switch>
+        <GlobalStyle />
+      </Layout>
+    </ThemeProvider>
   )
 }

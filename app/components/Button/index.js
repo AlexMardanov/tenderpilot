@@ -7,7 +7,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { theme } from '../../theme/theme'
+import { theme } from 'theme'
 
 export const Button = styled(Link)`
   background: ${props => (props.color === 'primary' ? theme.colors.baseColor : 'none')};

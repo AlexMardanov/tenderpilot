@@ -78,10 +78,6 @@ export function ProductsTable({
       key: 'created',
       label: 'Created',
     },
-    {
-      key: 'action',
-      label: 'Action',
-    },
   ]
 
   return (
@@ -91,7 +87,7 @@ export function ProductsTable({
           <TableRow>
             {thead.map(item =>
               item.sortable ? (
-                <TableCell align="right">
+                <TableCell align="right" key={item.key}>
                   <TableSortLabel
                     active={sortQuery.sortBy === item.key}
                     onClick={handleSort(item.key)}
@@ -101,19 +97,22 @@ export function ProductsTable({
                   </TableSortLabel>
                 </TableCell>
               ) : (
-                <TableCell align="right">{item.label}</TableCell>
+                <TableCell align="right" key={item.key}>
+                  {item.label}
+                </TableCell>
               ),
             )}
+            <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map(product => (
             <TableRow key={product.id} hover>
-              <TableCell align="right">{product.number}</TableCell>
-              <TableCell align="right">{product.name}</TableCell>
-              <TableCell align="right">{product.unit}</TableCell>
-              <TableCell align="right">{product.category}</TableCell>
-              <TableCell align="right">{product.created}</TableCell>
+              {thead.map(item => (
+                <TableCell align="right" key={item.key}>
+                  {product[item.key]}
+                </TableCell>
+              ))}
               <TableCell align="right">
                 <VisibilityIcon className={classes.icon} onClick={handleEditClick(product.id)} />
                 {!!handleRemoveClick && (

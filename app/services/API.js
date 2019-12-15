@@ -7,7 +7,9 @@ export function fetchProducts(query, sort) {
 
   const search = name ? `&name=${name}` : ''
   const order = sort.sortBy ? `&order[${sortBy}]=${direction}` : ''
-  const url = `${PRODUCTS_URL}?perPage=${rowsPerPage}&page=${page + 1}${search}${order}`
+  const perPage = rowsPerPage !== -1 ? `&perPage=${rowsPerPage}` : '&pagination=false'
+
+  const url = `${PRODUCTS_URL}?page=${page + 1}${perPage}${search}${order}`
 
   return request(url)
 }

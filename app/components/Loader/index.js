@@ -8,7 +8,7 @@ import React from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { theme } from 'theme/theme'
+import { theme } from 'theme'
 
 const useStyles = makeStyles({
   overlay: {

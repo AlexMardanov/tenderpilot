@@ -71,8 +71,6 @@ export function ProductsList(props) {
   }
 
   function handleSort(sortBy) {
-    // const direction = sortQuery.sortBy === sortBy ? 'asc' : 'desc'
-
     return handleSortDispatch(sortBy, sortQuery)
   }
 
